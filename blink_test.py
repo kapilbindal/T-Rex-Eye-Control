@@ -2,6 +2,7 @@ import cv2
 import dlib
 import numpy as np
 import pyautogui as pg
+from math import hypot
 
 
 cap = cv2.VideoCapture(0)
@@ -12,6 +13,9 @@ predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 right_eye_arr = [36,37,38,39,40,41]
 left_eye_arr = [42,43,44,45,46,47]
 
+def get_mid(point1,point2):
+	return int((point1.x+point2.x)/2),int((point1.y+point2.y)/2)
+	
 def check_blinking(frame,eye_points,face_landmark):
 
 	leftPt = (face_landmark.part(eye_points[0]).x,face_landmark.part(eye_points[0]).y)
